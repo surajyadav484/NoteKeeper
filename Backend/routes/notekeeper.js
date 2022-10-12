@@ -11,4 +11,7 @@ router.post("/addNote", noteController.addNote);
 //PUT: http://localhost:5000/editNote
 router.put("/editNote", noteController.editNote);
 
+//DELETE: http://localhost:5000/delete/
+router.delete("/delete/:noteId", noteController.deleteNotes);
+
 module.exports = router;

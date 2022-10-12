@@ -20,6 +20,15 @@ exports.getNotes = async (req, res) => {
     res.status(500).json({ err: error.message });
   }
 };
+exports.deleteNotes = async (req, res) => {
+  try {
+    const { noteId } = req.params;
+    const response = await NoteKeeper.findOneAndDelete({ _id: noteId });
+    res.status(200).json(response);
+  } catch (error) {
+    res.status(500).json({ err: error.message });
+  }
+};
 
 exports.editNote = async (req, res) => {
   try {

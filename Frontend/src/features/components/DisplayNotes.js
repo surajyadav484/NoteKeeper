@@ -1,16 +1,18 @@
 import { useState } from "react";
 import { EditModal } from "./EditModal";
-import { editNotes } from "../notesSlice";
-import { useDispatch } from "react-redux";
-export const DisplayNotes = ({ _id, title, tagLine, body, pinned }) => {
-  const [isOpen, setIsOpen] = useState(false);
-  // const [isPinned, setIsPinned] = useState(pinned);
-  const dispatch = useDispatch();
 
-  const pinNote = () => {
-    console.log({ _id, title, tagLine, body, pinned: !pinned });
-    dispatch(editNotes({ _id, title, tagLine, body, pinned: !pinned }));
-  };
+export const DisplayNotes = ({
+  _id,
+  title,
+  tagLine,
+  body,
+  pinned,
+  pinNote,
+  handleDeleteNote,
+}) => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const note = { _id, title, tagLine, body, pinned: !pinned };
 
   return (
     <>
@@ -20,8 +22,10 @@ export const DisplayNotes = ({ _id, title, tagLine, body, pinned }) => {
           <h5>{tagLine}</h5>
           <p>{body}</p>
         </div>
-
-        <i className="fa fa-thumb-tack" onClick={pinNote}></i>
+        <div className="icons">
+          <i className="fa fa-thumb-tack" onClick={() => pinNote(note)}></i>
+          <i className="fa fa-trash" onClick={() => handleDeleteNote(_id)}></i>
+        </div>
       </div>
       <EditModal
         open={isOpen}
